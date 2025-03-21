@@ -13,3 +13,12 @@ With a sword in hand and courage in your heart, you embark on a quest to retriev
 But be warned—Malagar is no ordinary foe. He has foreseen your coming, and the deeper you go, the more dangerous your journey becomes. Will you defeat the sorcerer and restore peace, or will you fall like the warriors before you?
 
 Your choices will decide your fate in Warrior Quest.
+
+
+### Locations
+ - Town
+ - Shop
+ - Outside of town
+ - Whispering Woods
+ - Hollow Marsh
+ - Ruins of eldoria
