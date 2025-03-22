@@ -1,3 +1,4 @@
+import random
 from player import Player
 
 player = Player("Bob")
@@ -59,8 +60,21 @@ encounters = {
 }
 
 
+def trigger_encounter(location):
+    if location not in encounters:
+        return
+        
+    possible_encounters = encounters[location]
+    choice = random.choice(possible_encounters)
+    if not choice:
+        return
+    print("fight enemy -", choice)
+
+
+
 def move(new_location):
     print("You move to " + locations[new_location]["name"] + ".")
+    trigger_encounter(new_location)
     return new_location, locations[new_location]["directions"]
     
 
