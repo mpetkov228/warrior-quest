@@ -7,7 +7,15 @@ locations = {
         "name": "Dunhaven",
         "description": "A bustling town centre.",
         "directions": {
-            "north": "outskirts"
+            "north": "outskirts",
+            "shop": "shop"
+        }
+    },
+    "shop": {
+        "name": "Adventurer Supplies",
+        "description": "One stop shop for your adventuring needs",
+        "directions": {
+            "back": "town"
         }
     },
     "outskirts": {
@@ -44,25 +52,38 @@ locations = {
 }
 
 
+encounters = {
+    "woods": ["ghoul", None, "troll", None],
+    "marsh": ["raptor", None, None, "crocolisk"],
+    "ruins": ["undead", None, "dark sorcerer", None]
+}
+
+
+def move(new_location):
+    print("You move to " + locations[new_location]["name"] + ".")
+    return new_location, locations[new_location]["directions"]
+    
+
 def main():
     current_location = "town"
     directions = locations[current_location]["directions"]
 
     while True:
-        print()
+        print("--------------")
         print(f"You are in {locations[current_location]["name"]}")
         print("Where would you like to go from here?")
         for key, value in directions.items():
             print(f"{key} - {locations[value]["name"]}")
-        direction = input()
+
+        direction = input().lower()
+
         if direction == "quit":
             break
+
         if direction in directions:
-            current_location = directions[direction]
-            directions = locations[current_location]["directions"]
-            print(f"You move to {locations[current_location]["name"]}")
+            current_location, directions = move(directions[direction])
         else:
-            print("Please type in a valid direction or 'quit'")
+            print("Please enter a valid direction or 'quit'")
             continue
 
 

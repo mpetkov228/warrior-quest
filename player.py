@@ -5,5 +5,8 @@ class Player:
         self.current_location = current_location
 
     
-    def move(self, location):
-        self.current_location = location
+    # def move(self, new_location, directions):
+    #     if new_location in directions:
+    #         self.current_location = new_location
+    #         print("You enter " + )
+
