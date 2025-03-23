@@ -1,12 +1,14 @@
 class Player:
-    def __init__(self, name, current_location="town"):
+    def __init__(self, name):
         self.name = name
         self.health = 100
-        self.current_location = current_location
+        self.damage = 20
+        self.isAlive = True
 
     
-    # def move(self, new_location, directions):
-    #     if new_location in directions:
-    #         self.current_location = new_location
-    #         print("You enter " + )
+    def attack(self, target):
+        print(f"{target.name}: {target.health} hp")
+        print(f"You attack {target.name} dealing {self.damage} damage")
+        target.health -= self.damage
+        print(f"{target.name} has {target.health} hp remaining")
 

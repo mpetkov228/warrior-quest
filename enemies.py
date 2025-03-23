@@ -2,6 +2,7 @@ class Enemy:
     def __init__(self, health, damage):
         self.health = health
         self.damage = damage
+        self.isAlive = True
 
     
     def attack(self, target):
@@ -11,6 +12,7 @@ class Enemy:
 class Ghoul(Enemy):
     def __init__(self):
         super().__init__(40, 5)
+        self.name = "Ghoul"
 
     
     def speak(self):
@@ -20,6 +22,7 @@ class Ghoul(Enemy):
 class Troll(Enemy):
     def __init__(self):
         super().__init__(55, 10)
+        self.name = "Troll"
 
 
     def speak(self):
@@ -29,6 +32,7 @@ class Troll(Enemy):
 class Crocolisk(Enemy):
     def __init__(self):
         super().__init__(45, 8)
+        self.name = "Crocolisk"
     
 
     def speak(self):
@@ -38,6 +42,8 @@ class Crocolisk(Enemy):
 class Raptor(Enemy):
     def __init__(self):
         super().__init__(60, 12)
+        self.name = "Raptor"
+
     
     def speak(self):
         print("Raptor: Raaawr...")
@@ -46,6 +52,7 @@ class Raptor(Enemy):
 class Undead(Enemy):
     def __init__(self):
         super().__init__(65, 15)
+        self.name = "Undead"
 
 
     def speak(self):
@@ -55,6 +62,7 @@ class Undead(Enemy):
 class DarkSorcerer(Enemy):
     def __init__(self):
         super().__init__(80, 20)
+        self.name = "Dark Sorcerer"
     
 
     def speak(self):

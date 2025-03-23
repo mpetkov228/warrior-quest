@@ -1,6 +1,6 @@
 import random
 from player import Player
-from enemies import Ghoul, Raptor, Crocolisk, Troll
+from enemies import Ghoul, Raptor, Crocolisk, Troll, Undead, DarkSorcerer
 
 player = Player("Bob")
 
@@ -71,6 +71,21 @@ def create_enemy(kind):
             return Crocolisk()
         case "raptor":
             return Raptor()
+        case "undead":
+            return Undead()
+        case "dark sorcerer":
+            return DarkSorcerer()
+
+
+def combat(enemy):
+    print(f"{enemy.name} engages you in combat!")
+
+    while enemy.isAlive or player.isAlive:
+        choice = input("What is your next move?")
+        if choice == "attack":
+            player.attack(enemy)
+        
+        enemy.attack(player)
 
 
 def trigger_encounter(location):
@@ -84,7 +99,7 @@ def trigger_encounter(location):
     
     enemy = create_enemy(choice)
     enemy.speak()
-
+    combat(enemy)
 
 
 def move(new_location):
