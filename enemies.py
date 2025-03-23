@@ -41,3 +41,21 @@ class Raptor(Enemy):
     
     def speak(self):
         print("Raptor: Raaawr...")
+
+
+class Undead(Enemy):
+    def __init__(self):
+        super().__init__(65, 15)
+
+
+    def speak(self):
+        print("Undead: Intruder.. Die!")
+
+
+class DarkSorcerer(Enemy):
+    def __init__(self):
+        super().__init__(80, 20)
+    
+
+    def speak(self):
+        print("Dark Sorcerer: You will not disturb the master...")

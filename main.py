@@ -1,5 +1,6 @@
 import random
 from player import Player
+from enemies import Ghoul, Raptor, Crocolisk, Troll
 
 player = Player("Bob")
 
@@ -60,15 +61,29 @@ encounters = {
 }
 
 
+def create_enemy(kind):
+    match kind:
+        case "ghoul":
+            return Ghoul()
+        case "troll":
+            return Troll()
+        case "crocolisk":
+            return Crocolisk()
+        case "raptor":
+            return Raptor()
+
+
 def trigger_encounter(location):
     if location not in encounters:
         return
-        
+
     possible_encounters = encounters[location]
     choice = random.choice(possible_encounters)
     if not choice:
         return
-    print("fight enemy -", choice)
+    
+    enemy = create_enemy(choice)
+    enemy.speak()
 
 
 
