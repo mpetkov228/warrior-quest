@@ -1,18 +1,26 @@
 class Enemy:
-    def __init__(self, health, damage):
+    def __init__(self, name, health, damage):
+        self.name = name
         self.health = health
         self.damage = damage
         self.isAlive = True
 
     
     def attack(self, target):
-        target.health -= self.damage
+        target.take_damage(self.damage)
+        print(f"\n{self.name} attacks {target.name}")
+
+
+    def take_damage(self, damage):
+        self.health -= damage
+        if self.health <= 0:
+            self.isAlive = False
+
 
 
 class Ghoul(Enemy):
     def __init__(self):
-        super().__init__(40, 5)
-        self.name = "Ghoul"
+        super().__init__("Ghoul", 40, 5)
 
     
     def speak(self):
@@ -21,8 +29,7 @@ class Ghoul(Enemy):
 
 class Troll(Enemy):
     def __init__(self):
-        super().__init__(55, 10)
-        self.name = "Troll"
+        super().__init__("Troll", 55, 10)
 
 
     def speak(self):
@@ -31,8 +38,7 @@ class Troll(Enemy):
 
 class Crocolisk(Enemy):
     def __init__(self):
-        super().__init__(45, 8)
-        self.name = "Crocolisk"
+        super().__init__("Crocolisk", 45, 8)
     
 
     def speak(self):
@@ -41,8 +47,7 @@ class Crocolisk(Enemy):
 
 class Raptor(Enemy):
     def __init__(self):
-        super().__init__(60, 12)
-        self.name = "Raptor"
+        super().__init__("Raptor", 60, 12)
 
     
     def speak(self):
@@ -51,8 +56,7 @@ class Raptor(Enemy):
 
 class Undead(Enemy):
     def __init__(self):
-        super().__init__(65, 15)
-        self.name = "Undead"
+        super().__init__("Undead", 65, 15)
 
 
     def speak(self):
@@ -61,8 +65,7 @@ class Undead(Enemy):
 
 class DarkSorcerer(Enemy):
     def __init__(self):
-        super().__init__(80, 20)
-        self.name = "Dark Sorcerer"
+        super().__init__("Dark Sorcerer", 80, 20)
     
 
     def speak(self):

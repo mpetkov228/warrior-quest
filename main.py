@@ -81,11 +81,17 @@ def combat(enemy):
     print(f"{enemy.name} engages you in combat!")
 
     while enemy.isAlive or player.isAlive:
-        choice = input("What is your next move?")
+        choice = input("What is your next move? ")
         if choice == "attack":
             player.attack(enemy)
         
         enemy.attack(player)
+        print(f"You have {player.health} hp remaining")
+
+        if not player.isAlive:
+            print(f"You were killed by {enemy.name}!")
+            print("Game Over!")
+            exit()
 
 
 def trigger_encounter(location):
