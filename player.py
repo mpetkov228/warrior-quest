@@ -8,8 +8,11 @@ class Player:
     
     def attack(self, target):
         print(f"\nYou attack {target.name} dealing {self.damage} damage")
-        target.health -= self.damage
-        print(f"{target.name} has {target.health} hp remaining")
+        target.take_damage(self.damage)
+        if target.health < 0:
+            print(f"{target.name} has 0 hp")
+        else:
+            print(f"{target.name} has {target.health} hp remaining")
 
     
     def take_damage(self, damage):

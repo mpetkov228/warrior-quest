@@ -80,10 +80,14 @@ def create_enemy(kind):
 def combat(enemy):
     print(f"{enemy.name} engages you in combat!")
 
-    while enemy.isAlive or player.isAlive:
+    while True:
         choice = input("What is your next move? ")
         if choice == "attack":
             player.attack(enemy)
+
+        if not enemy.isAlive:
+            print(f"Victory! {enemy.name} is defeated!")
+            break
         
         enemy.attack(player)
         print(f"You have {player.health} hp remaining")
