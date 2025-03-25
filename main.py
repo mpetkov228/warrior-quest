@@ -1,6 +1,8 @@
 import random
 from player import Player
 from enemies import Ghoul, Raptor, Crocolisk, Troll, Undead, DarkSorcerer
+from utils import dash_separator
+
 
 player = Player("Bob")
 
@@ -78,6 +80,8 @@ def create_enemy(kind):
 
 
 def combat(enemy):
+    print(dash_separator)
+    enemy.speak()
     print(f"{enemy.name} engages you in combat!")
 
     while True:
@@ -108,8 +112,28 @@ def trigger_encounter(location):
         return
     
     enemy = create_enemy(choice)
-    enemy.speak()
     combat(enemy)
+
+
+def load_shop():
+    shop_inventory = {
+        "health potion": 5,
+        "bronze sword": 20,
+        "steel sword": 50,
+        "leather armor": 25,
+        "chain-mail armor": 60,
+        "wooden buckler": 15,
+        "medium shield": 45
+    }
+
+    print(dash_separator)
+
+    i = 1
+    for item, price in shop_inventory.items():
+        print(f"{i}. {item} - {price}g")
+        i += 1
+
+    input("Shopkeeper: What do you want to buy? ")
 
 
 def move(new_location):
@@ -136,6 +160,8 @@ def main():
 
         if direction in directions:
             current_location, directions = move(directions[direction])
+            if current_location == "shop":
+                load_shop()
         else:
             print("Please enter a valid direction or 'quit'")
             continue
