@@ -19,6 +19,7 @@ locations = {
         "name": "Adventurer Supplies",
         "description": "One stop shop for your adventuring needs",
         "directions": {
+            "vendor": "shop",
             "back": "town"
         }
     },
@@ -89,14 +90,14 @@ def combat(enemy):
         if choice == "attack":
             player.attack(enemy)
 
-        if not enemy.isAlive:
+        if not enemy.is_alive:
             print(f"Victory! {enemy.name} is defeated!")
             break
         
         enemy.attack(player)
         print(f"You have {player.health} hp remaining")
 
-        if not player.isAlive:
+        if not player.is_alive:
             print(f"You were killed by {enemy.name}!")
             print("Game Over!")
             exit()
@@ -128,12 +129,32 @@ def load_shop():
 
     print(dash_separator)
 
+    items = list(shop_inventory.items())
     i = 1
-    for item, price in shop_inventory.items():
+    for item, price in items:
         print(f"{i}. {item} - {price}g")
         i += 1
 
-    input("Shopkeeper: What do you want to buy? ")
+    while True:
+        choice = input("Shopkeeper: What do you want to buy? (enter the item number or 'leave')\n")
+
+        if choice == "leave":
+            print("Shopkeeper: See you again soon!")
+            break
+
+        try:
+            index = int(choice) - 1
+            if index in range(len(items)):
+                item_type, price = items[index]
+                if price <= player.gold_amount:
+                    player.buy_item((item_type, price))
+                    print(f"You buy {item_type}.")
+                else:
+                    print("Not enough gold!")
+        except:
+            print()
+        print(player.inventory)
+
 
 
 def move(new_location):

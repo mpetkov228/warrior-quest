@@ -3,7 +3,13 @@ class Player:
         self.name = name
         self.health = 100
         self.damage = 20
-        self.isAlive = True
+        self.gold_amount = 20
+        self.is_alive = True
+        self.inventory = {
+            "health potion": 2,
+            "wooden sword": 1,
+            "cloth armor": 1
+        }
 
     
     def attack(self, target):
@@ -18,4 +24,15 @@ class Player:
     def take_damage(self, damage):
         self.health -= damage
         if self.health <= 0:
-            self.isAlive = False
+            self.is_alive = False
+
+
+    def buy_item(self, item):
+        item_type, price = item
+        self.gold_amount -= price
+        if item_type in self.inventory:
+            self.inventory[item_type] += 1
+        else:
+            self.inventory[item_type] = 1
+
+

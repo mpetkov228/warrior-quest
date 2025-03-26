@@ -3,7 +3,7 @@ class Enemy:
         self.name = name
         self.health = health
         self.damage = damage
-        self.isAlive = True
+        self.is_alive = True
 
     
     def attack(self, target):
@@ -14,7 +14,7 @@ class Enemy:
     def take_damage(self, damage):
         self.health -= damage
         if self.health <= 0:
-            self.isAlive = False
+            self.is_alive = False
 
 
 
