@@ -80,6 +80,10 @@ def create_enemy(kind):
             return DarkSorcerer()
 
 
+def random_gold():
+    return random.randint(5, 10)
+
+
 def combat(enemy):
     print(dash_separator)
     enemy.speak()
@@ -91,8 +95,10 @@ def combat(enemy):
             player.attack(enemy)
 
         if not enemy.is_alive:
-            print(f"Victory! {enemy.name} is defeated!")
-            break
+            gold = random_gold()
+            player.gold_amount += gold
+            print(f"Victory! {enemy.name} is defeated! You loot {gold} gold.")
+            return
         
         enemy.attack(player)
         print(f"You have {player.health} hp remaining")
@@ -130,12 +136,12 @@ def load_shop():
     print(dash_separator)
 
     items = list(shop_inventory.items())
-    i = 1
-    for item, price in items:
-        print(f"{i}. {item} - {price}g")
-        i += 1
 
     while True:
+        i = 1
+        for item, price in items:
+            print(f"{i}. {item} - {price}g")
+            i += 1
         choice = input("Shopkeeper: What do you want to buy? (enter the item number or 'leave')\n")
 
         if choice == "leave":
@@ -148,13 +154,13 @@ def load_shop():
                 item_type, price = items[index]
                 if price <= player.gold_amount:
                     player.buy_item((item_type, price))
+                    player.change_armor()
+                    player.change_weapon()
                     print(f"You buy {item_type}.")
                 else:
                     print("Not enough gold!")
         except:
             print()
-        print(player.inventory)
-
 
 
 def move(new_location):

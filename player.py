@@ -23,7 +23,11 @@ class Player:
 
     
     def take_damage(self, damage):
-        self.health -= damage
+        armor_reduction = 0
+        if self.armor > 0:
+            armor_reduction = damage * (self.armor / 100)
+
+        self.health -= int(damage - armor_reduction)
         if self.health <= 0:
             self.is_alive = False
 
