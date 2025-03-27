@@ -3,6 +3,7 @@ class Player:
         self.name = name
         self.health = 100
         self.damage = 20
+        self.armor = 5
         self.gold_amount = 20
         self.is_alive = True
         self.inventory = {
@@ -35,4 +36,30 @@ class Player:
         else:
             self.inventory[item_type] = 1
 
+    
+    def drink_potion(self):
+        if self.inventory["health potion"] <= 0:
+            print("No potions in inventory")
+            return
+        if self.health == 100:
+            print("You are already at full health")
+            return
+        
+        self.health += 40
+        if self.health > 100:
+            self.health = 100
 
+
+
+    def change_armor(self):
+        if "chain-mail armor" in self.inventory:
+            self.armor = 30
+        elif "leather armor" in self.inventory:
+            self.armor = 15
+            
+    
+    def change_weapon(self):
+        if "steel sword" in self.inventory:
+            self.damage = 50
+        elif "bronze sword" in self.inventory:
+            self.damage = 35
