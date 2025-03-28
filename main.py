@@ -1,6 +1,7 @@
 import random
 from player import Player
 from enemies import Ghoul, Raptor, Crocolisk, Troll, Undead, DarkSorcerer
+from bosses import Malagar
 from utils import dash_separator
 
 
@@ -51,7 +52,15 @@ locations = {
         "name": "Ruins of Eldoria",
         "description": "Ruins of Eldoria, Malagar's fortress",
         "directions": {
+            "dark tower": "dark tower",
             "south": "marsh"
+        }
+    },
+    "dark tower": {
+        "name": "The Dark Tower",
+        "description": "Lord Malagar's lair",
+        "directions": {
+            "back": "ruins"
         }
     }
 }
@@ -60,7 +69,8 @@ locations = {
 encounters = {
     "woods": ["ghoul", None, "troll", None],
     "marsh": ["raptor", None, None, "crocolisk"],
-    "ruins": ["undead", None, "dark sorcerer", None]
+    "ruins": ["undead", None, "dark sorcerer", None],
+    "dark tower": ["malagar"]
 }
 
 
@@ -78,21 +88,29 @@ def create_enemy(kind):
             return Undead()
         case "dark sorcerer":
             return DarkSorcerer()
+        case "malagar":
+            return Malagar()
 
 
 def random_gold():
     return random.randint(5, 10)
 
 
-def combat(enemy):
-    print(dash_separator)
-    enemy.speak()
-    print(f"{enemy.name} engages you in combat!")
-
+def fight_mob(enemy):
     while True:
-        choice = input("What is your next move? ")
-        if choice == "attack":
+        print("1. Attack")
+        print("2. Drink potion")
+        print("3. Flee")
+        choice = input("What is your next move? (enter number) ")
+        if choice == "1":
             player.attack(enemy)
+        elif choice == "2":
+            player.drink_potion()
+        elif choice == "3":
+            print("You flee and manage to escape.")
+            return
+        else:
+            continue
 
         if not enemy.is_alive:
             gold = random_gold()
@@ -107,6 +125,25 @@ def combat(enemy):
             print(f"You were killed by {enemy.name}!")
             print("Game Over!")
             exit()
+
+
+def fight_boss(enemy):
+    fight_mob(enemy)
+    print(dash_separator)
+    print("Congratulations! You have bested " + enemy.name + " and saved Dunhaven and its people!")
+    print("Thank you for playing!")
+    exit()
+
+
+def combat(enemy):
+    print(dash_separator)
+    enemy.speak()
+    print(f"{enemy.name} engages you in combat!")
+
+    if enemy.name != "Lord Malagar":
+        fight_mob(enemy)
+    else:
+        fight_boss(enemy)
 
 
 def trigger_encounter(location):

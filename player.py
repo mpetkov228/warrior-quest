@@ -4,10 +4,10 @@ class Player:
         self.health = 100
         self.damage = 20
         self.armor = 5
-        self.gold_amount = 20
+        self.gold_amount = 2000
         self.is_alive = True
         self.inventory = {
-            "health potion": 2,
+            "health potion": 20,
             "wooden sword": 1,
             "cloth armor": 1
         }
@@ -29,6 +29,7 @@ class Player:
 
         self.health -= int(damage - armor_reduction)
         if self.health <= 0:
+            self.health = 0
             self.is_alive = False
 
 
@@ -49,7 +50,8 @@ class Player:
             print("You are already at full health")
             return
         
-        self.health += 40
+        self.health += 60
+        self.inventory["health potion"] -= 1
         if self.health > 100:
             self.health = 100
 
